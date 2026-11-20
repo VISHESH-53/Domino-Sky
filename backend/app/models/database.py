@@ -26,14 +26,37 @@ from pathlib import Path
 import tempfile
 
 DATA_DIR = Path(__file__).parent.parent / "data"
-if os.getenv("VERCEL"):
+
+def _resolve_db_url() -> str:
+    env_db = os.getenv("DATABASE_URL")
+    if env_db:
+        return env_db
+    
+    # In Vercel, AWS Lambda, or any environment where local data dir is read-only,
+    # always use the OS temp directory (/tmp) which is guaranteed to be writable.
+    is_serverless = bool(
+        os.getenv("VERCEL") or 
+        os.getenv("VERCEL_ENV") or 
+        os.getenv("AWS_LAMBDA_FUNCTION_NAME") or 
+        os.getenv("LAMBDA_TASK_ROOT")
+    )
+    
+    if not is_serverless:
+        try:
+            DATA_DIR.mkdir(parents=True, exist_ok=True)
+            test_file = DATA_DIR / ".write_test"
+            test_file.touch()
+            test_file.unlink()
+            db_file = (DATA_DIR / "domino_sky.db").resolve().as_posix()
+            return f"sqlite:///{db_file}"
+        except (OSError, PermissionError):
+            pass
+            
     tmp_dir = Path(tempfile.gettempdir())
     db_file = (tmp_dir / "domino_sky.db").resolve().as_posix()
-    DB_PATH = os.getenv("DATABASE_URL", f"sqlite:///{db_file}")
-else:
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-    db_file = (DATA_DIR / "domino_sky.db").resolve().as_posix()
-    DB_PATH = os.getenv("DATABASE_URL", f"sqlite:///{db_file}")
+    return f"sqlite:///{db_file}"
+
+DB_PATH = _resolve_db_url()
 
 engine = create_engine(
     DB_PATH,
@@ -41,17 +64,19 @@ engine = create_engine(
     echo=False
 )
 
-# Enable WAL mode and foreign keys for SQLite
+# Enable safe DELETE mode and foreign keys for SQLite
 if "sqlite" in DB_PATH:
     @event.listens_for(engine, "connect")
     def set_sqlite_pragma(dbapi_connection, connection_record):
         cursor = dbapi_connection.cursor()
-        if not os.getenv("VERCEL"):
-            try:
-                cursor.execute("PRAGMA journal_mode=WAL;")
-            except Exception:
-                pass
-        cursor.execute("PRAGMA foreign_keys=ON;")
+        try:
+            cursor.execute("PRAGMA journal_mode=DELETE;")
+        except Exception:
+            pass
+        try:
+            cursor.execute("PRAGMA foreign_keys=ON;")
+        except Exception:
+            pass
         cursor.close()
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -126,8 +151,12 @@ class AuditLogModel(Base):
 def init_db():
     Base.metadata.create_all(bind=engine)
 
-# Auto-initialize tables
-init_db()
+# Auto-initialize tables safely
+try:
+    init_db()
+except Exception as e:
+    import logging
+    logging.getLogger(__name__).warning("Initial init_db notice: %s", e)
 
 def get_db():
     db = SessionLocal()

@@ -36,9 +36,12 @@ limiter = Limiter(key_func=get_remote_address, default_limits=["120/minute"])
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Initialize Database Schema & Seed Default Users on Startup
-    init_db()
-    seed_default_users()
+    # Initialize Database Schema & Seed Default Users on Startup safely
+    try:
+        init_db()
+        seed_default_users()
+    except Exception as e:
+        print(f"Lifespan initialization notice: {e}")
     yield
 
 app = FastAPI(

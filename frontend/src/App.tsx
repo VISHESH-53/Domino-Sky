@@ -23,7 +23,8 @@ import {
   fetchRoutes,
   fetchLatestSimulation,
   runSimulation,
-  resetSimulation
+  resetSimulation,
+  ensureAuthenticated
 } from './services/api';
 
 export const App: React.FC = () => {
@@ -45,6 +46,11 @@ export const App: React.FC = () => {
   const loadInitialData = async () => {
     setIsLoading(true);
     try {
+      try {
+        await ensureAuthenticated();
+      } catch (authErr) {
+        console.warn('Initial session auth notice:', authErr);
+      }
       const [apts, rts, latestSim] = await Promise.all([
         fetchAirports(),
         fetchRoutes(),

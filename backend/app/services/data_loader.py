@@ -8,13 +8,16 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 def _resolve_data_dir() -> Path:
-    candidate = Path(__file__).resolve().parent.parent / "data"
-    if candidate.exists() and (candidate / "airports.json").exists():
-        return candidate
-    candidate2 = Path.cwd() / "backend" / "app" / "data"
-    if candidate2.exists() and (candidate2 / "airports.json").exists():
-        return candidate2
-    return candidate
+    candidates = [
+        Path(__file__).resolve().parent.parent / "data",
+        Path.cwd() / "backend" / "app" / "data",
+        Path.cwd() / "app" / "data",
+        Path(__file__).resolve().parent.parent.parent / "backend" / "app" / "data",
+    ]
+    for c in candidates:
+        if c.exists() and (c / "airports.json").exists():
+            return c
+    return candidates[0]
 
 DATA_DIR = _resolve_data_dir()
 
