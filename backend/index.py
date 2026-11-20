@@ -1,14 +1,16 @@
 """
 DOMINO SKY — FastAPI Backend Entrypoint for Vercel Services
-Exposes the FastAPI 'app' instance at module top level.
+Explicitly assigns 'app = ...' and 'handler = ...' at module top level.
 """
 import os
 import sys
 from pathlib import Path
 
-# Ensure backend directory is in sys.path
 backend_dir = Path(__file__).resolve().parent
 if str(backend_dir) not in sys.path:
     sys.path.insert(0, str(backend_dir))
 
-from app.main import app
+import app.main
+
+app = app.main.app
+handler = app
