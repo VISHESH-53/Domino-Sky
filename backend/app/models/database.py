@@ -25,9 +25,13 @@ from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
-DATA_DIR.mkdir(parents=True, exist_ok=True)
-db_file = (DATA_DIR / "domino_sky.db").resolve().as_posix()
-DB_PATH = os.getenv("DATABASE_URL", f"sqlite:///{db_file}")
+if os.getenv("VERCEL"):
+    db_file = "/tmp/domino_sky.db"
+    DB_PATH = os.getenv("DATABASE_URL", f"sqlite:///{db_file}")
+else:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    db_file = (DATA_DIR / "domino_sky.db").resolve().as_posix()
+    DB_PATH = os.getenv("DATABASE_URL", f"sqlite:///{db_file}")
 
 engine = create_engine(
     DB_PATH,
