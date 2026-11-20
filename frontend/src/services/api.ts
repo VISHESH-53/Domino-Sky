@@ -9,7 +9,8 @@ import {
   DominoExplanation
 } from '../types';
 
-const API_BASE = '/api';
+const envApi = (import.meta as any).env?.VITE_API_URL;
+const API_BASE = (envApi || '/api').replace(/\/$/, '');
 
 // --- AUTHENTICATION & RBAC STATE MANAGEMENT ---
 export interface AuthUser {
