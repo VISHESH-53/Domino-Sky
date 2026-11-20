@@ -1,0 +1,32 @@
+[
+  {
+    "registration": "VT-SP1",
+    "model": "Airbus A320neo",
+    "capacity": 186,
+    "current_airport": "BOM",
+    "available_from": "06:00",
+    "turnaround_ready_minutes": 30,
+    "hourly_operating_cost": 250000,
+    "compatible_aircraft_models": [
+      "Airbus A320neo",
+      "Airbus A321neo",
+      "Boeing 737-800"
+    ],
+    "status": "READY_STANDBY"
+  },
+  {
+    "registration": "VT-SP2",
+    "model": "Airbus A320neo",
+    "capacity": 186,
+    "current_airport": "DEL",
+    "available_from": "06:00",
+    "turnaround_ready_minutes": 30,
+    "hourly_operating_cost": 250000,
+    "compatible_aircraft_models": [
+      "Airbus A320neo",
+      "Airbus A321neo",
+      "Boeing 737 MAX 8"
+    ],
+    "status": "READY_STANDBY"
+  }
+]

@@ -1,0 +1,15 @@
+crew_id,assigned_aircraft,captain,first_officer,cabin_lead,cabin_crew_count,duty_start_time,max_fdp_minutes,rest_period_required_minutes,assigned_flight_ids,home_base,status
+CREW-01,VT-ABC,Capt. Sharma,FO Saxena,Lead CC 1,4,05:15,600,720,"[""DS-101"", ""DS-102"", ""DS-103""]",BLR,ON_DUTY
+CREW-02,VT-DEF,Capt. Verma,FO Deshmukh,Lead CC 2,4,05:45,600,720,"[""DS-111"", ""DS-112"", ""DS-113""]",BOM,ON_DUTY
+CREW-03,VT-GHI,Capt. Kapoor,FO Chopra,Lead CC 3,4,05:30,600,720,"[""DS-121"", ""DS-122""]",DEL,ON_DUTY
+CREW-04,VT-JKL,Capt. Rao,FO Natarajan,Lead CC 4,4,06:00,600,720,"[""DS-131"", ""DS-132"", ""DS-133""]",CCU,ON_DUTY
+CREW-05,VT-MNO,Capt. Iyer,FO Pillai,Lead CC 5,4,06:15,600,720,"[""DS-141"", ""DS-142"", ""DS-143""]",HYD,ON_DUTY
+CREW-06,VT-PQR,Capt. Patel,FO Joshi,Lead CC 6,4,05:45,600,720,"[""DS-151"", ""DS-152"", ""DS-153""]",MAA,ON_DUTY
+CREW-07,VT-STU,Capt. Sen,FO Mukherjee,Lead CC 7,4,06:30,600,720,"[""DS-161"", ""DS-162"", ""DS-163""]",DEL,ON_DUTY
+CREW-08,VT-VWX,Capt. Singh,FO Kaur,Lead CC 8,4,06:45,600,720,"[""DS-171"", ""DS-172"", ""DS-173""]",BOM,ON_DUTY
+CREW-09,VT-YZA,Capt. Nair,FO Kurian,Lead CC 9,4,05:45,600,720,"[""DS-181"", ""DS-182"", ""DS-183""]",BLR,ON_DUTY
+CREW-10,VT-BCD,Capt. Mehta,FO Shah,Lead CC 10,4,06:45,600,720,"[""DS-191"", ""DS-192"", ""DS-193""]",PNQ,ON_DUTY
+CREW-11,VT-EFG,Capt. Gupta,FO Agarwal,Lead CC 11,4,05:45,600,720,"[""DS-201"", ""DS-202"", ""DS-203""]",AMD,ON_DUTY
+CREW-12,VT-HIJ,Capt. Menon,FO Mathew,Lead CC 12,4,05:15,600,720,"[""DS-211"", ""DS-212""]",DEL,ON_DUTY
+CREW-13,VT-KLM,Capt. Reddy,FO Yadav,Lead CC 13,4,05:30,600,720,"[""DS-221"", ""DS-222"", ""DS-223""]",COK,ON_DUTY
+CREW-14,VT-NOP,Capt. Bose,FO Ghosh,Lead CC 14,4,05:45,600,720,"[""DS-231"", ""DS-232"", ""DS-233""]",JAI,ON_DUTY

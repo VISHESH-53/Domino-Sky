@@ -1,0 +1,17 @@
+code,icao,name,city,state,latitude,longitude,runways,capacity_per_hour,min_turnaround_time,is_hub
+BOM,VABB,Chhatrapati Shivaji Maharaj International Airport,Mumbai,Maharashtra,19.0896,72.8656,2,38,45,True
+DEL,VIDP,Indira Gandhi International Airport,Delhi,Delhi,28.5562,77.1,3,50,45,True
+BLR,VOBL,Kempegowda International Airport,Bengaluru,Karnataka,13.1986,77.7066,2,35,40,True
+CCU,VECC,Netaji Subhash Chandra Bose International Airport,Kolkata,West Bengal,22.6547,88.4467,2,30,40,True
+MAA,VOMM,Chennai International Airport,Chennai,Tamil Nadu,12.9941,80.1709,2,32,40,True
+HYD,VOHS,Rajiv Gandhi International Airport,Hyderabad,Telangana,17.2403,78.4294,2,32,40,True
+GOI,VOGO,Dabolim International Airport,Goa,Goa,15.3808,73.8314,1,18,35,False
+PNQ,VAPO,Pune International Airport,Pune,Maharashtra,18.5822,73.9197,1,20,35,False
+AMD,VAAH,Sardar Vallabhbhai Patel International Airport,Ahmedabad,Gujarat,23.0734,72.6347,1,24,35,False
+COK,VOCI,Cochin International Airport,Kochi,Kerala,10.1518,76.393,1,22,35,False
+JAI,VIJP,Jaipur International Airport,Jaipur,Rajasthan,26.8242,75.8122,1,20,35,False
+LKO,VILK,Chaudhary Charan Singh International Airport,Lucknow,Uttar Pradesh,26.7606,80.8893,1,18,35,False
+GAU,VEGT,Lokpriya Gopinath Bordoloi International Airport,Guwahati,Assam,26.1061,91.5859,1,16,35,False
+PAT,VEPT,Jay Prakash Narayan Airport,Patna,Bihar,25.5913,85.088,1,15,35,False
+TRV,VOTV,Trivandrum International Airport,Thiruvananthapuram,Kerala,8.4821,76.92,1,16,35,False
+IXC,VICG,Shaheed Bhagat Singh International Airport,Chandigarh,Punjab / Haryana,30.6735,76.7885,1,16,35,False

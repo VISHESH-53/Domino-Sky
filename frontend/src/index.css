@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #050811;
+    color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* Custom Scrollbar for Aviation Command Center */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0f1d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0284c7;
+}
+
+/* Glassmorphism Aviation Panels */
+.aviation-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+}
+
+.aviation-panel-glow {
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 20px -3px rgba(0, 240, 255, 0.15);
+}
+
+.aviation-danger-glow {
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 20px -3px rgba(239, 68, 68, 0.2);
+}
+
+.aviation-amber-glow {
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 20px -3px rgba(245, 158, 11, 0.2);
+}
+
+.aviation-green-glow {
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 20px -3px rgba(16, 185, 129, 0.2);
+}
+
+/* Radar Sweep Line Animation */
+@keyframes radar-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.radar-sweep-effect {
+  position: relative;
+}
+
+.radar-sweep-effect::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(0, 240, 255, 0.15) 0deg, transparent 60deg, transparent 360deg);
+  border-radius: 50%;
+  animation: radar-spin 4s linear infinite;
+  pointer-events: none;
+}

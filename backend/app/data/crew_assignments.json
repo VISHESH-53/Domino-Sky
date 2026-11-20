@@ -1,0 +1,252 @@
+[
+  {
+    "crew_id": "CREW-01",
+    "assigned_aircraft": "VT-ABC",
+    "captain": "Capt. Sharma",
+    "first_officer": "FO Saxena",
+    "cabin_lead": "Lead CC 1",
+    "cabin_crew_count": 4,
+    "duty_start_time": "05:15",
+    "max_fdp_minutes": 600,
+    "rest_period_required_minutes": 720,
+    "assigned_flight_ids": [
+      "DS-101",
+      "DS-102",
+      "DS-103"
+    ],
+    "home_base": "BLR",
+    "status": "ON_DUTY"
+  },
+  {
+    "crew_id": "CREW-02",
+    "assigned_aircraft": "VT-DEF",
+    "captain": "Capt. Verma",
+    "first_officer": "FO Deshmukh",
+    "cabin_lead": "Lead CC 2",
+    "cabin_crew_count": 4,
+    "duty_start_time": "05:45",
+    "max_fdp_minutes": 600,
+    "rest_period_required_minutes": 720,
+    "assigned_flight_ids": [
+      "DS-111",
+      "DS-112",
+      "DS-113"
+    ],
+    "home_base": "BOM",
+    "status": "ON_DUTY"
+  },
+  {
+    "crew_id": "CREW-03",
+    "assigned_aircraft": "VT-GHI",
+    "captain": "Capt. Kapoor",
+    "first_officer": "FO Chopra",
+    "cabin_lead": "Lead CC 3",
+    "cabin_crew_count": 4,
+    "duty_start_time": "05:30",
+    "max_fdp_minutes": 600,
+    "rest_period_required_minutes": 720,
+    "assigned_flight_ids": [
+      "DS-121",
+      "DS-122"
+    ],
+    "home_base": "DEL",
+    "status": "ON_DUTY"
+  },
+  {
+    "crew_id": "CREW-04",
+    "assigned_aircraft": "VT-JKL",
+    "captain": "Capt. Rao",
+    "first_officer": "FO Natarajan",
+    "cabin_lead": "Lead CC 4",
+    "cabin_crew_count": 4,
+    "duty_start_time": "06:00",
+    "max_fdp_minutes": 600,
+    "rest_period_required_minutes": 720,
+    "assigned_flight_ids": [
+      "DS-131",
+      "DS-132",
+      "DS-133"
+    ],
+    "home_base": "CCU",
+    "status": "ON_DUTY"
+  },
+  {
+    "crew_id": "CREW-05",
+    "assigned_aircraft": "VT-MNO",
+    "captain": "Capt. Iyer",
+    "first_officer": "FO Pillai",
+    "cabin_lead": "Lead CC 5",
+    "cabin_crew_count": 4,
+    "duty_start_time": "06:15",
+    "max_fdp_minutes": 600,
+    "rest_period_required_minutes": 720,
+    "assigned_flight_ids": [
+      "DS-141",
+      "DS-142",
+      "DS-143"
+    ],
+    "home_base": "HYD",
+    "status": "ON_DUTY"
+  },
+  {
+    "crew_id": "CREW-06",
+    "assigned_aircraft": "VT-PQR",
+    "captain": "Capt. Patel",
+    "first_officer": "FO Joshi",
+    "cabin_lead": "Lead CC 6",
+    "cabin_crew_count": 4,
+    "duty_start_time": "05:45",
+    "max_fdp_minutes": 600,
+    "rest_period_required_minutes": 720,
+    "assigned_flight_ids": [
+      "DS-151",
+      "DS-152",
+      "DS-153"
+    ],
+    "home_base": "MAA",
+    "status": "ON_DUTY"
+  },
+  {
+    "crew_id": "CREW-07",
+    "assigned_aircraft": "VT-STU",
+    "captain": "Capt. Sen",
+    "first_officer": "FO Mukherjee",
+    "cabin_lead": "Lead CC 7",
+    "cabin_crew_count": 4,
+    "duty_start_time": "06:30",
+    "max_fdp_minutes": 600,
+    "rest_period_required_minutes": 720,
+    "assigned_flight_ids": [
+      "DS-161",
+      "DS-162",
+      "DS-163"
+    ],
+    "home_base": "DEL",
+    "status": "ON_DUTY"
+  },
+  {
+    "crew_id": "CREW-08",
+    "assigned_aircraft": "VT-VWX",
+    "captain": "Capt. Singh",
+    "first_officer": "FO Kaur",
+    "cabin_lead": "Lead CC 8",
+    "cabin_crew_count": 4,
+    "duty_start_time": "06:45",
+    "max_fdp_minutes": 600,
+    "rest_period_required_minutes": 720,
+    "assigned_flight_ids": [
+      "DS-171",
+      "DS-172",
+      "DS-173"
+    ],
+    "home_base": "BOM",
+    "status": "ON_DUTY"
+  },
+  {
+    "crew_id": "CREW-09",
+    "assigned_aircraft": "VT-YZA",
+    "captain": "Capt. Nair",
+    "first_officer": "FO Kurian",
+    "cabin_lead": "Lead CC 9",
+    "cabin_crew_count": 4,
+    "duty_start_time": "05:45",
+    "max_fdp_minutes": 600,
+    "rest_period_required_minutes": 720,
+    "assigned_flight_ids": [
+      "DS-181",
+      "DS-182",
+      "DS-183"
+    ],
+    "home_base": "BLR",
+    "status": "ON_DUTY"
+  },
+  {
+    "crew_id": "CREW-10",
+    "assigned_aircraft": "VT-BCD",
+    "captain": "Capt. Mehta",
+    "first_officer": "FO Shah",
+    "cabin_lead": "Lead CC 10",
+    "cabin_crew_count": 4,
+    "duty_start_time": "06:45",
+    "max_fdp_minutes": 600,
+    "rest_period_required_minutes": 720,
+    "assigned_flight_ids": [
+      "DS-191",
+      "DS-192",
+      "DS-193"
+    ],
+    "home_base": "PNQ",
+    "status": "ON_DUTY"
+  },
+  {
+    "crew_id": "CREW-11",
+    "assigned_aircraft": "VT-EFG",
+    "captain": "Capt. Gupta",
+    "first_officer": "FO Agarwal",
+    "cabin_lead": "Lead CC 11",
+    "cabin_crew_count": 4,
+    "duty_start_time": "05:45",
+    "max_fdp_minutes": 600,
+    "rest_period_required_minutes": 720,
+    "assigned_flight_ids": [
+      "DS-201",
+      "DS-202",
+      "DS-203"
+    ],
+    "home_base": "AMD",
+    "status": "ON_DUTY"
+  },
+  {
+    "crew_id": "CREW-12",
+    "assigned_aircraft": "VT-HIJ",
+    "captain": "Capt. Menon",
+    "first_officer": "FO Mathew",
+    "cabin_lead": "Lead CC 12",
+    "cabin_crew_count": 4,
+    "duty_start_time": "05:15",
+    "max_fdp_minutes": 600,
+    "rest_period_required_minutes": 720,
+    "assigned_flight_ids": [
+      "DS-211",
+      "DS-212"
+    ],
+    "home_base": "DEL",
+    "status": "ON_DUTY"
+  },
+  {
+    "crew_id": "CREW-13",
+    "assigned_aircraft": "VT-KLM",
+    "captain": "Capt. Reddy",
+    "first_officer": "FO Yadav",
+    "cabin_lead": "Lead CC 13",
+    "cabin_crew_count": 4,
+    "duty_start_time": "05:30",
+    "max_fdp_minutes": 600,
+    "rest_period_required_minutes": 720,
+    "assigned_flight_ids": [
+      "DS-221",
+      "DS-222",
+      "DS-223"
+    ],
+    "home_base": "COK",
+    "status": "ON_DUTY"
+  },
+  {
+    "crew_id": "CREW-14",
+    "assigned_aircraft": "VT-NOP",
+    "captain": "Capt. Bose",
+    "first_officer": "FO Ghosh",
+    "cabin_lead": "Lead CC 14",
+    "cabin_crew_count": 4,
+    "duty_start_time": "05:45",
+    "max_fdp_minutes": 600,
+    "rest_period_required_minutes": 720,
+    "assigned_flight_ids": [
+      "DS-231",
+      "DS-232",
+      "DS-233"
+    ],
+    "home_base": "JAI",
+    "status": "ON_DUTY"
+  }
+]

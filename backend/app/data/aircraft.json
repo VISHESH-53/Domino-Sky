@@ -1,0 +1,130 @@
+[
+  {
+    "registration": "VT-ABC",
+    "model": "Airbus A320neo",
+    "capacity": 186,
+    "base_airport": "BLR",
+    "is_spare": false,
+    "status": "AVAILABLE"
+  },
+  {
+    "registration": "VT-DEF",
+    "model": "Airbus A320neo",
+    "capacity": 186,
+    "base_airport": "BOM",
+    "is_spare": false,
+    "status": "AVAILABLE"
+  },
+  {
+    "registration": "VT-GHI",
+    "model": "Airbus A321neo",
+    "capacity": 222,
+    "base_airport": "DEL",
+    "is_spare": false,
+    "status": "AVAILABLE"
+  },
+  {
+    "registration": "VT-JKL",
+    "model": "Airbus A320neo",
+    "capacity": 180,
+    "base_airport": "CCU",
+    "is_spare": false,
+    "status": "AVAILABLE"
+  },
+  {
+    "registration": "VT-MNO",
+    "model": "Boeing 737 MAX 8",
+    "capacity": 189,
+    "base_airport": "HYD",
+    "is_spare": false,
+    "status": "AVAILABLE"
+  },
+  {
+    "registration": "VT-PQR",
+    "model": "Airbus A320neo",
+    "capacity": 180,
+    "base_airport": "MAA",
+    "is_spare": false,
+    "status": "AVAILABLE"
+  },
+  {
+    "registration": "VT-STU",
+    "model": "Airbus A321neo",
+    "capacity": 222,
+    "base_airport": "DEL",
+    "is_spare": false,
+    "status": "AVAILABLE"
+  },
+  {
+    "registration": "VT-VWX",
+    "model": "Airbus A320neo",
+    "capacity": 186,
+    "base_airport": "BOM",
+    "is_spare": false,
+    "status": "AVAILABLE"
+  },
+  {
+    "registration": "VT-YZA",
+    "model": "Boeing 737-800",
+    "capacity": 180,
+    "base_airport": "BLR",
+    "is_spare": false,
+    "status": "AVAILABLE"
+  },
+  {
+    "registration": "VT-BCD",
+    "model": "Airbus A320neo",
+    "capacity": 186,
+    "base_airport": "PNQ",
+    "is_spare": false,
+    "status": "AVAILABLE"
+  },
+  {
+    "registration": "VT-EFG",
+    "model": "Airbus A320neo",
+    "capacity": 180,
+    "base_airport": "AMD",
+    "is_spare": false,
+    "status": "AVAILABLE"
+  },
+  {
+    "registration": "VT-HIJ",
+    "model": "Airbus A321neo",
+    "capacity": 222,
+    "base_airport": "DEL",
+    "is_spare": false,
+    "status": "AVAILABLE"
+  },
+  {
+    "registration": "VT-KLM",
+    "model": "Airbus A320neo",
+    "capacity": 186,
+    "base_airport": "COK",
+    "is_spare": false,
+    "status": "AVAILABLE"
+  },
+  {
+    "registration": "VT-NOP",
+    "model": "Boeing 737 MAX 8",
+    "capacity": 189,
+    "base_airport": "JAI",
+    "is_spare": false,
+    "status": "AVAILABLE"
+  },
+  {
+    "registration": "VT-SP1",
+    "model": "Airbus A320neo",
+    "capacity": 186,
+    "base_airport": "BOM",
+    "is_spare": true,
+    "status": "READY_STANDBY"
+  },
+  {
+    "registration": "VT-SP2",
+    "model": "Airbus A320neo",
+    "capacity": 186,
+    "base_airport": "DEL",
+    "is_spare": true,
+    "status": "READY_STANDBY"
+  }
+]

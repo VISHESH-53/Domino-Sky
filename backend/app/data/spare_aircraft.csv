@@ -1,0 +1,3 @@
+registration,model,capacity,current_airport,available_from,turnaround_ready_minutes,hourly_operating_cost,compatible_aircraft_models,status
+VT-SP1,Airbus A320neo,186,BOM,06:00,30,250000,"[""Airbus A320neo"", ""Airbus A321neo"", ""Boeing 737-800""]",READY_STANDBY
+VT-SP2,Airbus A320neo,186,DEL,06:00,30,250000,"[""Airbus A320neo"", ""Airbus A321neo"", ""Boeing 737 MAX 8""]",READY_STANDBY
