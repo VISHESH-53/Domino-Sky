@@ -1,7 +1,8 @@
 """
 DOMINO SKY — FastAPI Backend Entrypoint fallback for Vercel
-Exposes the FastAPI 'app' instance.
+Exposes the FastAPI 'app' instance at module top level.
 """
+import os
 import sys
 from pathlib import Path
 
