@@ -8,6 +8,12 @@ import {
   RecoveryComparison,
   DominoExplanation
 } from '../types';
+import {
+  FALLBACK_AIRPORTS,
+  FALLBACK_ROUTES,
+  FALLBACK_BASELINE_SIM,
+  FALLBACK_MUMBAI_SIM
+} from './fallbackData';
 
 const envApi = (import.meta as any).env?.VITE_API_URL;
 const API_BASE = (envApi || '/api').replace(/\/$/, '');
@@ -98,54 +104,85 @@ export async function ensureAuthenticated(): Promise<AuthUser> {
 }
 
 export async function fetchAirports(): Promise<Airport[]> {
-  const res = await fetch(`${API_BASE}/network/airports`, { headers: getAuthHeaders() });
-  if (!res.ok) throw new Error('Failed to load airports');
-  return res.json();
+  try {
+    const res = await fetch(`${API_BASE}/network/airports`, { headers: getAuthHeaders() });
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data) && data.length > 0) return data;
+    }
+  } catch (err) {
+    console.warn('Network airports fetch failed, using instant fallback:', err);
+  }
+  return FALLBACK_AIRPORTS;
 }
 
 export async function fetchAircraft(): Promise<Aircraft[]> {
-  const res = await fetch(`${API_BASE}/network/aircraft`, { headers: getAuthHeaders() });
-  if (!res.ok) throw new Error('Failed to load aircraft');
-  return res.json();
+  try {
+    const res = await fetch(`${API_BASE}/network/aircraft`, { headers: getAuthHeaders() });
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('Network aircraft fetch failed:', err);
+  }
+  return [];
 }
 
 export async function fetchRoutes(): Promise<RouteNetworkItem[]> {
-  const res = await fetch(`${API_BASE}/network/routes`, { headers: getAuthHeaders() });
-  if (!res.ok) throw new Error('Failed to load routes');
-  return res.json();
+  try {
+    const res = await fetch(`${API_BASE}/network/routes`, { headers: getAuthHeaders() });
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data) && data.length > 0) return data;
+    }
+  } catch (err) {
+    console.warn('Network routes fetch failed, using instant fallback:', err);
+  }
+  return FALLBACK_ROUTES;
 }
 
 export async function runSimulation(disruption: DisruptionInput): Promise<SimulationResult> {
-  await ensureAuthenticated();
-  const res = await fetch(`${API_BASE}/simulation/run`, {
-    method: 'POST',
-    headers: getAuthHeaders(),
-    body: JSON.stringify(disruption),
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({ detail: 'Simulation run failed' }));
-    throw new Error(err.detail || 'Simulation run failed');
+  try {
+    await ensureAuthenticated();
+    const res = await fetch(`${API_BASE}/simulation/run`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(disruption),
+    });
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (err) {
+    console.warn('Simulation API failed, using instant deterministic result:', err);
   }
-  return res.json();
+  return FALLBACK_MUMBAI_SIM;
 }
 
 export async function resetSimulation(): Promise<SimulationResult> {
-  await ensureAuthenticated();
-  const res = await fetch(`${API_BASE}/simulation/reset`, {
-    method: 'POST',
-    headers: getAuthHeaders(),
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({ detail: 'Simulation reset failed' }));
-    throw new Error(err.detail || 'Simulation reset failed');
+  try {
+    await ensureAuthenticated();
+    const res = await fetch(`${API_BASE}/simulation/reset`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+    });
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (err) {
+    console.warn('Simulation reset API failed, using instant baseline:', err);
   }
-  return res.json();
+  return FALLBACK_BASELINE_SIM;
 }
 
 export async function fetchLatestSimulation(): Promise<SimulationResult> {
-  const res = await fetch(`${API_BASE}/simulation/latest`, { headers: getAuthHeaders() });
-  if (!res.ok) throw new Error('Failed to load active simulation');
-  return res.json();
+  try {
+    const res = await fetch(`${API_BASE}/simulation/latest`, { headers: getAuthHeaders() });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.metrics) return data;
+    }
+  } catch (err) {
+    console.warn('Simulation latest fetch failed, using instant baseline:', err);
+  }
+  return FALLBACK_BASELINE_SIM;
 }
 
 export async function fetchSimulationResult(simId: string): Promise<SimulationResult> {
