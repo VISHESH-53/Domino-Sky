@@ -23,10 +23,12 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 from pathlib import Path
+import tempfile
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 if os.getenv("VERCEL"):
-    db_file = "/tmp/domino_sky.db"
+    tmp_dir = Path(tempfile.gettempdir())
+    db_file = (tmp_dir / "domino_sky.db").resolve().as_posix()
     DB_PATH = os.getenv("DATABASE_URL", f"sqlite:///{db_file}")
 else:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -44,7 +46,11 @@ if "sqlite" in DB_PATH:
     @event.listens_for(engine, "connect")
     def set_sqlite_pragma(dbapi_connection, connection_record):
         cursor = dbapi_connection.cursor()
-        cursor.execute("PRAGMA journal_mode=WAL;")
+        if not os.getenv("VERCEL"):
+            try:
+                cursor.execute("PRAGMA journal_mode=WAL;")
+            except Exception:
+                pass
         cursor.execute("PRAGMA foreign_keys=ON;")
         cursor.close()
 

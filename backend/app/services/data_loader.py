@@ -7,7 +7,16 @@ import json
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 
-DATA_DIR = Path(__file__).parent.parent / "data"
+def _resolve_data_dir() -> Path:
+    candidate = Path(__file__).resolve().parent.parent / "data"
+    if candidate.exists() and (candidate / "airports.json").exists():
+        return candidate
+    candidate2 = Path.cwd() / "backend" / "app" / "data"
+    if candidate2.exists() and (candidate2 / "airports.json").exists():
+        return candidate2
+    return candidate
+
+DATA_DIR = _resolve_data_dir()
 
 class DataLoader:
     _instance = None
