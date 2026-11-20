@@ -99,23 +99,6 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-aviation-darkest text-slate-100 flex flex-col font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
-      {/* Skip to Main Content Link for Keyboard and Screen Reader Accessibility */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-cyan-500 focus:text-slate-950 focus:font-mono focus:font-bold focus:rounded-md focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-cyan-300"
-      >
-        Skip to main operations dashboard
-      </a>
-
-      {/* Screen Reader Live Status Region */}
-      <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
-        {sim ? (
-          sim.disruption.airport_code ? 
-            `Disruption active for ${sim.disruption.airport_code}. ${sim.metrics.delayed_flights} flights delayed, network health is ${sim.metrics.network_health_score.toFixed(1)} percent.` :
-            "Network operating at nominal baseline. 100 percent health score."
-        ) : "Loading flight network operations data."}
-      </div>
-
       {/* 1. AOC Command Header */}
       <CommandHeader
         sim={sim}
@@ -126,7 +109,7 @@ export const App: React.FC = () => {
       />
 
       {/* 2. Main Command Center Container */}
-      <main id="main-content" tabIndex={-1} className="flex-1 p-3 sm:p-5 lg:p-6 space-y-5 max-w-[1720px] mx-auto w-full focus:outline-none">
+      <main className="flex-1 p-3 sm:p-5 lg:p-6 space-y-5 max-w-[1720px] mx-auto w-full">
         {/* Module A: Network Operations Dashboard */}
         <NetworkDashboard metrics={sim?.metrics} />
 

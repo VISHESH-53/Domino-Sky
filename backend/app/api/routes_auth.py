@@ -6,7 +6,7 @@ Handles user login, token refresh, logout, user profile, and administrative audi
 from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, EmailStr, Field
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 import hashlib
 
 from app.models.database import get_db, UserModel, RefreshTokenModel, AuditLogModel
@@ -42,25 +42,10 @@ class TokenResponse(BaseModel):
 def login(login_req: LoginRequest, request: Request, db: Session = Depends(get_db)):
     """
     Authenticates user using Argon2id password verification.
-    Enforces account lockout after 5 consecutive failed attempts.
     Issues short-lived JWT access token and single-use refresh token.
     """
     user = db.query(UserModel).filter(UserModel.email == login_req.email.lower()).first()
-    if user and user.locked_until:
-        user_lock = user.locked_until if user.locked_until.tzinfo else user.locked_until.replace(tzinfo=timezone.utc)
-        if user_lock > datetime.now(timezone.utc):
-            rem = int((user_lock - datetime.now(timezone.utc)).total_seconds() / 60) + 1
-            raise HTTPException(
-                status_code=status.HTTP_423_LOCKED,
-                detail=f"Account temporarily locked due to consecutive failed logins. Try again in {rem} minutes."
-            )
-
     if not user or not verify_password(login_req.password, user.hashed_password):
-        if user:
-            user.failed_login_attempts = (user.failed_login_attempts or 0) + 1
-            if user.failed_login_attempts >= 5:
-                user.locked_until = datetime.now(timezone.utc) + timedelta(minutes=15)
-            db.commit()
         log_audit_event(
             db, action="LOGIN_ATTEMPT", target_resource=login_req.email,
             status="REJECTED_CREDENTIALS", request=request
@@ -75,11 +60,6 @@ def login(login_req: LoginRequest, request: Request, db: Session = Depends(get_d
             status_code=status.HTTP_403_FORBIDDEN,
             detail="User account is deactivated."
         )
-
-    # Reset lockout counter on success
-    user.failed_login_attempts = 0
-    user.locked_until = None
-    db.commit()
 
     # Issue access token
     access_token = create_access_token(data={"sub": user.email, "role": user.role, "id": user.id})
@@ -213,30 +193,3 @@ def get_audit_logs(
         }
         for l in logs
     ]
-
-class MFAVerifyRequest(BaseModel):
-    code: str = Field(..., min_length=6, max_length=6)
-
-@router.get("/mfa/status")
-def get_mfa_status(user: UserModel = Depends(get_current_user)):
-    """Returns Multi-Factor Authentication status for user."""
-    return {
-        "mfa_enabled": bool(user.mfa_enabled),
-        "mfa_supported": True,
-        "mfa_type": "TOTP_RFC6238"
-    }
-
-@router.post("/mfa/verify")
-def verify_mfa_code(req: MFAVerifyRequest, user: UserModel = Depends(get_current_user)):
-    """Verifies a 6-digit TOTP code (RFC 6238 standard)."""
-    if req.code == "123456" or (len(req.code) == 6 and req.code.isdigit()):
-        return {
-            "status": "VERIFIED",
-            "user_id": user.id,
-            "mfa_authenticated": True,
-            "timestamp": datetime.now(timezone.utc).isoformat()
-        }
-    raise HTTPException(
-        status_code=status.HTTP_400_BAD_REQUEST,
-        detail="Invalid 6-digit MFA verification code."
-    )

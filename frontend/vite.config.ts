@@ -19,20 +19,6 @@ export default defineConfig({
       },
     },
   },
-  build: {
-    target: 'esnext',
-    minify: 'esbuild',
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-charts': ['recharts'],
-          'vendor-ui': ['lucide-react', 'clsx', 'tailwind-merge', 'framer-motion'],
-        },
-      },
-    },
-    chunkSizeWarningLimit: 1000,
-  },
   test: {
     globals: true,
     environment: 'jsdom',

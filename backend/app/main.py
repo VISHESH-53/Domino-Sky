@@ -17,7 +17,6 @@ from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.base import BaseHTTPMiddleware
-from fastapi.middleware.gzip import GZipMiddleware
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
@@ -68,9 +67,6 @@ app.add_middleware(
     allow_headers=["Authorization", "Content-Type", "Accept"],
     max_age=600,
 )
-
-# Enable high-speed GZip compression for payloads > 1KB
-app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 # 2. SECURITY HEADERS & REQUEST SIZE LIMITING MIDDLEWARE
 MAX_REQUEST_SIZE = 2 * 1024 * 1024 # 2 Megabytes

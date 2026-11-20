@@ -94,10 +94,6 @@ class UserModel(Base):
     full_name = Column(String(255), nullable=False)
     role = Column(String(50), nullable=False, default="VIEWER") # ADMIN, DISPATCHER, ANALYST, VIEWER
     is_active = Column(Boolean, default=True, nullable=False)
-    failed_login_attempts = Column(Integer, default=0, nullable=False)
-    locked_until = Column(DateTime, nullable=True)
-    mfa_secret = Column(String(64), nullable=True)
-    mfa_enabled = Column(Boolean, default=False, nullable=False)
     created_at = Column(DateTime, default=get_utc_now, nullable=False)
 
     refresh_tokens = relationship("RefreshTokenModel", back_populates="user", cascade="all, delete-orphan")
@@ -154,24 +150,6 @@ class AuditLogModel(Base):
 
 def init_db():
     Base.metadata.create_all(bind=engine)
-    # Self-healing migration for SQLite existing databases
-    if "sqlite" in DB_PATH:
-        try:
-            with engine.connect() as conn:
-                res = conn.exec_driver_sql("PRAGMA table_info(users)").fetchall()
-                existing_cols = {row[1] for row in res}
-                new_cols = {
-                    "failed_login_attempts": "INTEGER DEFAULT 0 NOT NULL",
-                    "locked_until": "DATETIME",
-                    "mfa_secret": "VARCHAR(64)",
-                    "mfa_enabled": "BOOLEAN DEFAULT 0 NOT NULL"
-                }
-                for col, col_type in new_cols.items():
-                    if col not in existing_cols:
-                        conn.exec_driver_sql(f"ALTER TABLE users ADD COLUMN {col} {col_type}")
-                conn.commit()
-        except Exception:
-            pass
 
 # Auto-initialize tables safely
 try:
