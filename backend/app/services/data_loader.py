@@ -40,18 +40,29 @@ class DataLoader:
         return cls._instance
 
     def load_all(self):
-        with open(DATA_DIR / "airports.json", "r", encoding="utf-8") as f:
-            self.airports = json.load(f)
-        with open(DATA_DIR / "aircraft.json", "r", encoding="utf-8") as f:
-            self.aircraft = json.load(f)
-        with open(DATA_DIR / "flights.json", "r", encoding="utf-8") as f:
-            self.flights = json.load(f)
-        with open(DATA_DIR / "passenger_connections.json", "r", encoding="utf-8") as f:
-            self.passenger_connections = json.load(f)
-        with open(DATA_DIR / "crew_assignments.json", "r", encoding="utf-8") as f:
-            self.crew_assignments = json.load(f)
-        with open(DATA_DIR / "spare_aircraft.json", "r", encoding="utf-8") as f:
-            self.spare_aircraft = json.load(f)
+        def _read_json(filename: str):
+            candidates = [
+                DATA_DIR / filename,
+                Path(__file__).resolve().parent.parent / "data" / filename,
+                Path.cwd() / "backend" / "app" / "data" / filename,
+                Path.cwd() / "app" / "data" / filename,
+            ]
+            for p in candidates:
+                if p.exists():
+                    try:
+                        with open(p, "r", encoding="utf-8") as f:
+                            return json.load(f)
+                    except Exception as e:
+                        print(f"Warning: error reading {p}: {e}")
+            print(f"Warning: data file {filename} could not be resolved from candidates")
+            return []
+
+        self.airports = _read_json("airports.json")
+        self.aircraft = _read_json("aircraft.json")
+        self.flights = _read_json("flights.json")
+        self.passenger_connections = _read_json("passenger_connections.json")
+        self.crew_assignments = _read_json("crew_assignments.json")
+        self.spare_aircraft = _read_json("spare_aircraft.json")
 
     def get_airport(self, code: str) -> Optional[Dict[str, Any]]:
         return next((a for a in self.airports if a["code"] == code), None)
